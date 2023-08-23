@@ -28,7 +28,7 @@
         <div id="form">
           <form id="myForm" name="myform" value="myform" > 
             <div id="form0Container">
-              <div id="open0"><h2>WELCOME 🙏</h2></div>
+              <div id="open0"><h2>WELCOME </h2></div>
             
               <div id="open1">Before using our application, please read carefully and accept our
                 Terms and Services:
@@ -58,12 +58,12 @@
               <div id="txts">
                 <div class="input-container">
                   <label for="name" >Name</label>
-                  <input type="text" id="name" name="name" class="floating-input" onkeypress="return((event.charCode>=65 && event.charCode<=90) || (event.charCode>=97 && event.charCode<=122) || event.charCode==32) && event.code!=='Space'" required/>
+                  <input type="text" id="name" name="name" class="floating-input" onkeypress="return((event.charCode>=65 && event.charCode<=90) || (event.charCode>=97 && event.charCode<=122) || event.charCode==32) && event.code!=='Space'" />
                 </div>
               
                 <div class="input-container">
                   <label for="age" >Age</label>
-                  <input type="text" id="age" name="age" class="floating-input" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'" required/>
+                  <input type="text" id="age" name="age" class="floating-input" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'" />
                 </div>
 
                 <div id="ht-wt">
@@ -76,15 +76,15 @@
                   <div class="input-container">
                     <label for="height">Height</label>
                     <input type="text" id="height" name="height" class="floating-input" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'" />
-                    <span class="tooltip">Height in <b>m</b></span>
+                    <span class="tooltip">Height in <b>cm</b></span>
                   </div>   
                 </div>
 
                 <div class="input-container-radio">
                   <label for="gender">Gender:
-                    <input type="radio" id="male" name="gender" value="male" required />
+                    <input type="radio" id="male" name="gender" value="male" />
                     <label for="male" class="gend">Male</label>
-                    <input type="radio" id="female" name="gender" value="female" required/>
+                    <input type="radio" id="female" name="gender" value="female" />
                     <label for="female" class="gend">Female</label>
                   </label>
                 </div>
@@ -138,7 +138,7 @@
               <div class="dropdown">
                 <div class="dropdown-select"></div>
                 <input type="text" placeholder="Search Symptoms" id="search-input">
-                <div class="dropdown-content" style="font: .8em verdana;">
+                <div class="dropdown-content" id="dropdown-content" style="font: .8em verdana;">
                   
                   <button type="button" value="itching" class="selectedButton">Itching</button>
                   <button type="button" value="continuous_sneezing" class="selectedButton">Continuous Sneezing</button>
@@ -175,7 +175,7 @@
                   <button type="button" value="lethargy" class="selectedButton">Lethargy</button>
                   <button type="button" value="irregular_sugar_level" class="selectedButton">Irregular Sugar Level</button>
                   <button type="button" value="blurred_and_distorted_vision" class="selectedButton">Blurred and Distorted Vision</button>
-                  <button type="button" value="obesity" class="selectedButton">Obesity</button>
+                  <button type="button" value="obesity" class="selectedButton" id="obesity">Obesity</button>
                   <button type="button" value="excessive_hunger" class="selectedButton">Excessive Hunger</button>
                   <button type="button" value="increased_appetite" class="selectedButton">Increased Appetite</button>
                   <button type="button" value="polyuria" class="selectedButton">Polyuria</button>
@@ -183,7 +183,7 @@
                   <button type="button" value="dehydration" class="selectedButton">Dehydration</button>
                   <button type="button" value="diarrhoea" class="selectedButton">Diarrhoea</button>
                   <button type="button" value="breathlessness" class="selectedButton">Breathlessness</button>
-                  <button type="button" value="family_history" class="selectedButton">Family History</button>
+        
                   <button type="button" value="mucoid_sputum" class="selectedButton">Mucoid Sputum</button>
                   <button type="button" value="headache" class="selectedButton">Headache</button>
                   <button type="button" value="dizziness" class="selectedButton">Dizziness</button>
