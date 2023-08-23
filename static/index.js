@@ -1,5 +1,3 @@
-
-
 var buttons = document.getElementsByName("sym");
 for (var i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function () {
@@ -40,17 +38,45 @@ function nextForm() {
     currentFormIndex++;
     showForm(currentFormIndex);
   }
+
+
   if (currentFormIndex == 0) {
     document.getElementById("backbtn").disabled = true;
     document.getElementById("heads").style.display = "flex";
+    
+  }
+  if(currentFormIndex==1){
+    // Get height and weight values from the form
+var height = parseFloat((document.getElementById('height').value)/100); // in meters
+var weight = parseFloat(document.getElementById('weight').value); // in kilograms
+console.log(height,weight);
+
+// Calculate BMI
+var bmi = weight / (height * height);
+
+// Determine if obesity is present
+var isObese = bmi >= 30;
+
+// Select the symptoms dropdown element
+var symptomsDropdown = document.getElementById('dropdown-content');
+
+// If obesity is present, select the "Obesity" option in the dropdown
+if (isObese) {
+      document.getElementById('obesity').selected = true;
+}
+else{
+  document.getElementById('obesity').selected = false;
+}
+
+
   }
   if (currentFormIndex == 3) {
     document.getElementById("t-c-submit").disabled = true;
   } else {
     document.getElementById("backbtn").disabled = false;
     document.getElementById("t-c-submit").disabled = false;
-    document.getElementById('predict').style.display="block";
-    document.getElementById("medic").style.display = 'block';
+    document.getElementById("predict").style.display = "block";
+    document.getElementById("medic").style.display = "block";
   }
 
   document.getElementById("form0Container").style.display = "none";
@@ -62,6 +88,7 @@ function prevForm() {
     showForm(currentFormIndex);
     document.getElementById("form0Container").style.display = "none";
   }
+  
   if (currentFormIndex == 0) {
     document.getElementById("backbtn").disabled = true;
     document.getElementById("heads").style.display = "flex";
@@ -71,8 +98,8 @@ function prevForm() {
   } else {
     document.getElementById("backbtn").disabled = false;
     document.getElementById("t-c-submit").disabled = false;
-    document.getElementById('predict').style.display="block";
-    document.getElementById("medic").style.display = 'block';
+    document.getElementById("predict").style.display = "block";
+    document.getElementById("medic").style.display = "block";
   }
 
   document.getElementById("output").style.display = "none";
@@ -116,12 +143,14 @@ function updateQuestions() {
       }
     } else {
       question4.style.display = "none";
+      question5.style.display = "none";
     }
   } else {
     question3.style.display = "none";
     question3dup.style.display = "none";
     question4.style.display = "none";
     question5.style.display = "none";
+    // preg.style.display = "none";
   }
 }
 
@@ -167,6 +196,11 @@ searchInput.addEventListener("input", function () {
     }
   });
 });
+
+
+
+
+
 
 dropdownContent.addEventListener("click", function (event) {
   if (event.target.nodeName === "BUTTON") {
@@ -221,9 +255,6 @@ $(document).ready(function () {
     console.log(preg);
     var trisemister = $("input[name=trisemister]:checked").val();
 
-
-    
-
     // Send an AJAX request to the server
     $.ajax({
       url: "/update",
@@ -231,8 +262,8 @@ $(document).ready(function () {
       data: {
         name: name,
         age: age,
-        weight:weight,
-        height:height,
+        weight: weight,
+        height: height,
         gender: gender,
         alcohol: alcohol,
         // cigar: cigar,
@@ -243,88 +274,122 @@ $(document).ready(function () {
       //   $('#output').html(response); // Update the content of the element
       // }
       success: function (response) {
-        console.log(response.name, response.age,response.weight,response.height,response.gender,response.alcohol,response.preg,response.trisemister);
-        $("#output").empty(); // Clear the content of the element
-        $("#output").append(
-          " <b>User Details</b>:<br>________________<br>"
+        console.log(
+          response.name,
+          response.age,
+          response.weight,
+          response.height,
+          response.gender,
+          response.alcohol,
+          response.preg,
+          response.trisemister
         );
-        $("#output").append("<b>Name</b>: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + response.name + "<br>");
-        $("#output").append("<b>Age</b>: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + response.age + "yr<br>");
-          console.log((response.weight).length);
-        if((response.weight).length==0){
+        $("#output").empty(); // Clear the content of the element
+        $("#output").append(" <b>User Details</b>:<br>________________<br>");
+        $("#output").append(
+          "<b>Name</b>: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + response.name + "<br>"
+        );
+        $("#output").append(
+          "<b>Age</b>: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" +
+            response.age +
+            "yr<br>"
+        );
+        console.log(response.weight.length);
+        if (response.weight.length == 0) {
           $("#output").append("<b>Weight</b>: &nbsp&nbsp&nbsp " + "-" + "<br>");
-        }
-        else{
-          $("#output").append("<b>Weight</b>: &nbsp&nbsp&nbsp " + response.weight + "kg<br>");
+        } else {
+          $("#output").append(
+            "<b>Weight</b>: &nbsp&nbsp&nbsp " + response.weight + "kg<br>"
+          );
         }
 
-        if((response.height).length==0){
-          $("#output").append("<b>Height</b>: &nbsp&nbsp&nbsp&nbsp  " + "-" + "<br>");
+        if (response.height.length == 0) {
+          $("#output").append(
+            "<b>Height</b>: &nbsp&nbsp&nbsp&nbsp  " + "-" + "<br>"
+          );
+        } else {
+          $("#output").append(
+            "<b>Height</b>: &nbsp&nbsp&nbsp " + response.height + "cm<br>"
+          );
         }
-        else{
-          $("#output").append("<b>Height</b>: &nbsp&nbsp&nbsp " + response.height + "m<br>");
-        }
-     
-        
-        $("#output").append("<b>Gender</b>:&nbsp&nbsp&nbsp&nbsp " + response.gender + "<br>");
+
+        $("#output").append(
+          "<b>Gender</b>:&nbsp&nbsp&nbsp&nbsp " + response.gender + "<br>"
+        );
 
         // console.log((response.alcohol).length);
-        
-        if(cigar === undefined){
-          $("#output").append("<b>Cigar</b>: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + "No" + "<br>");
-        }
-        else{
-          $("#output").append("<b>Cigar</b>: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + cigar + "<br>");
-        }
-        
 
-        if(response.age > 16){
-          if((response.alcohol).length==5){
-            $("#output").append("<b>Alcohol</b>:&nbsp&nbsp&nbsp&nbsp " + "Yes" + "<br>");
+        if (cigar === undefined) {
+          $("#output").append(
+            "<b>Cigar</b>: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + "No" + "<br>"
+          );
+        } else {
+          $("#output").append(
+            "<b>Cigar</b>: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + cigar + "<br>"
+          );
+        }
+
+        if (response.age > 16) {
+          if (response.alcohol.length == 5) {
+            $("#output").append(
+              "<b>Alcohol</b>:&nbsp&nbsp&nbsp&nbsp " + "Yes" + "<br>"
+            );
+          } else {
+            $("#output").append(
+              "<b>Alcohol</b>:&nbsp&nbsp&nbsp&nbsp " + "No" + "<br>"
+            );
           }
-          else{
-            $("#output").append("<b>Alcohol</b>:&nbsp&nbsp&nbsp&nbsp " + "No" + "<br>");
-          }
-          
-          if(response.gender==="male"){
-            $("#output").append("<b>Pregnant</b>: &nbsp" + "not-applicable" + "<br>");
-            $("#output").append("<b>trimister</b>: &nbsp" + "not-applicable" + "<br>" + "<br>");
-          }
-          else{
+
+          if (response.gender === "male") {
+            $("#output").append(
+              "<b>Pregnant</b>: &nbsp" + "not-applicable" + "<br>"
+            );
+            $("#output").append(
+              "<b>trimister</b>: &nbsp" + "not-applicable" + "<br>" + "<br>"
+            );
+          } else {
             $("#output").append("<b>Pregnant</b>: &nbsp" + preg + "<br>");
 
-            if(preg==='Yes'){
-              var isSubset = ['A','B','C','D'].every(item => response.trisemister.includes(item));
-              
-              if(isSubset){
-                $("#output").append("<b>trimister</b>: &nbsp" + "1" + "<br>" + "<br>");
+            if (preg === "Yes") {
+              var isSubset = ["A", "B", "C", "D"].every((item) =>
+                response.trisemister.includes(item)
+              );
+
+              if (isSubset) {
+                $("#output").append(
+                  "<b>trimister</b>: &nbsp" + "1" + "<br>" + "<br>"
+                );
+              } else {
+                $("#output").append(
+                  "<b>trimister</b>: &nbsp" + "2/3" + "<br>" + "<br>"
+                );
               }
-              else{
-                $("#output").append("<b>trimister</b>: &nbsp" + "2/3" + "<br>" + "<br>");
-              }
-              
+            } else {
+              $("#output").append(
+                "<b>trimister</b>: &nbsp" + "not-applicable" + "<br>" + "<br>"
+              );
             }
-            else{
-              $("#output").append("<b>trimister</b>: &nbsp" + "not-applicable" + "<br>" + "<br>");
-            }
-            
           }
-        }
-        else{
-          $("#output").append("<b>Alcohol</b>:&nbsp&nbsp&nbsp&nbsp " + "No" + "<br>");
-          $("#output").append("<b>Cigar</b>: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + "No" + "<br>");
+        } else {
+          $("#output").append(
+            "<b>Alcohol</b>:&nbsp&nbsp&nbsp&nbsp " + "No" + "<br>"
+          );
+          $("#output").append(
+            "<b>Cigar</b>: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + "No" + "<br>"
+          );
           $("#output").append("<b>Pregnant</b>: &nbsp" + "No" + "<br>");
-          $("#output").append("<b>trimister</b>: &nbsp" + "not-applicable" + "<br>" + "<br>");
+          $("#output").append(
+            "<b>trimister</b>: &nbsp" + "not-applicable" + "<br>" + "<br>"
+          );
         }
-        
-        
       },
     });
   });
 });
 
 function sendSymptoms() {
-  document.getElementById('predict').style.display="none";
+  // document.getElementById("predict").style.display = "none";
+  
   var values = [];
   $(".dropdown-select > div").each(function () {
     var value = $(this)
@@ -337,118 +402,149 @@ function sendSymptoms() {
     values.push(value);
   });
   console.log(values);
+  
+    var name = document.getElementById("name").value;
+    var age = document.getElementById("age").value;
 
-  if (values.length > 2) {
-    // Sending selected symptoms to the server
-    $.ajax({
-      url: "/send_data",
-      type: "POST",
-      contentType: "application/json",
-      data: JSON.stringify(values),
+    var gender = document.querySelector('input[name="gender"]:checked');
 
-      success: function (response) {
-        console.log("Data received from Flask");
-        console.log(response);
+    if (name != "") {
+      if (age != "") {
+        if (gender) {
+          if (values.length > 2) {
+            // Sending selected symptoms to the server
+            $.ajax({
+              url: "/send_data",
+              type: "POST",
+              contentType: "application/json",
+              data: JSON.stringify(values),
+        
+              success: function (response) {
+                console.log("Data received from Flask");
+                console.log(response);
+                console.log(response.length);
+                // Process the response data and display it on the page
+                if (response.length > 0) {
+                  document.getElementById("form4Container").display="block";
 
-        // Process the response data and display it on the page
-        if (response.length > 0) {
-          var resultsElement = document.getElementById("results");
-          resultsElement.innerHTML = ""; // Clear previous results
-          resultsElement.innerHTML =
-            "Based on the given symptoms: <b>" + values.join(", ") + "</b><br><br>";
-          for (var i = 0; i < response.length; i++) {
-            var disease = response[i].disease;
-            var probability = response[i].probability;
-            var precautions = response[i].precautions;
-
-            var resultElement = document.createElement("div");
-
-            var resultElementProbability = document.createElement("span");
-            resultElementProbability.innerHTML =
-              "Possibility of having '" + disease;
-
-            var resultElementButton = document.createElement("i");
-            resultElementButton.className = "fas fa-info-circle";
-            resultElementButton.id = disease;
-
-            var resultElementProbability1 = document.createElement("span");
-            if (probability >= 50) {
-              resultElementProbability1.innerHTML =
-                "':<span style='color:green;'><b>" +
-                probability +
-                "% </b></span> ";
-            } else {
-              resultElementProbability1.innerHTML =
-                "':<span style='color:red;'><b>" +
-                probability +
-                "%</b> <br><i>as probability is below THRESHOLD--we recommend u to consult Hospital</i> </span> ";
-            }
-
-            var nextitem = document.createElement("span");
-            nextitem.innerHTML = "_________________________________";
-
-            var precdiv = document.createElement("div");
-            precdiv.id = "precdiv";
-            // precdiv.style.border="2px solid black";
-
-            var resultElement1 = document.createElement("button");
-            resultElement1.textContent = "Get Precautions";
-            resultElement1.id="getprec";
-            resultElement1.addEventListener(
-              "click",
-              createPrecautionsToggleHandler(resultElement1)
-            );
-
-            // var resultElement2 = document.createElement('button');
-            // resultElement2.textContent = 'Get Medication';
-
-            var resultElementPrec = document.createElement("span");
-            resultElementPrec.className = "precautions";
-            resultElementPrec.style.display = "none";
-
-            for (var j = 0; j < precautions.length; j++) {
-              var precautionItem = document.createElement("span");
-              precautionItem.textContent = precautions[j];
-              resultElementPrec.appendChild(precautionItem);
-              resultElementPrec.appendChild(document.createElement("br"));
-            }
-
-            var resultElementButtonClickListener = function (disease) {
-              return function () {
-                redirectToWikipedia(disease);
-              };
-            };
-
-            resultElementButton.addEventListener(
-              "click",
-              resultElementButtonClickListener(disease)
-            );
-
-            resultElement.appendChild(resultElementProbability);
-            resultElement.appendChild(resultElementButton);
-            resultElement.appendChild(resultElementProbability1);
-
-            // resultElement.appendChild(document.createElement('br'));
-            precdiv.appendChild(resultElement1);
-            // precdiv.appendChild(resultElement2);
-            precdiv.appendChild(resultElementPrec);
-
-            resultsElement.appendChild(resultElement);
-            resultsElement.appendChild(precdiv);
-            resultsElement.appendChild(nextitem);
+                  var resultsElement = document.getElementById("results");
+                  resultsElement.innerHTML = ""; // Clear previous results
+                  resultsElement.innerHTML =
+                    "Based on the given symptoms: <b>" +
+                    values.join(", ") +
+                    "</b><br><br>";
+                  for (var i = 0; i < response.length; i++) {
+                    var disease = response[i].disease;
+                    var probability = response[i].probability;
+                    var precautions = response[i].precautions;
+        
+                    var resultElement = document.createElement("div");
+        
+                    var resultElementProbability = document.createElement("span");
+                    resultElementProbability.innerHTML =
+                      "Possibility of having '" + disease;
+        
+                    var resultElementButton = document.createElement("i");
+                    resultElementButton.className = "fas fa-info-circle";
+                    resultElementButton.id = disease;
+        
+                    var resultElementProbability1 = document.createElement("span");
+                    if (probability >= 50) {
+                      resultElementProbability1.innerHTML =
+                        "':<span style='color:green;'><b>" +
+                        probability +
+                        "% </b></span> ";
+                    } else {
+                      resultElementProbability1.innerHTML =
+                        "':<span style='color:red;'><b>" +
+                        probability +
+                        "%</b> <br><i>as probability is below THRESHOLD--we recommend u to consult Hospital</i> </span> ";
+                    }
+        
+                    var nextitem = document.createElement("span");
+                    nextitem.innerHTML = "_________________________________";
+        
+                    var precdiv = document.createElement("div");
+                    precdiv.id = "precdiv";
+                    // precdiv.style.border="2px solid black";
+        
+                    var resultElement1 = document.createElement("button");
+                    resultElement1.textContent = "Get Precautions";
+                    resultElement1.id = "getprec";
+                    resultElement1.addEventListener(
+                      "click",
+                      createPrecautionsToggleHandler(resultElement1)
+                    );
+        
+                    // var resultElement2 = document.createElement('button');
+                    // resultElement2.textContent = 'Get Medication';
+        
+                    var resultElementPrec = document.createElement("span");
+                    resultElementPrec.className = "precautions";
+                    resultElementPrec.style.display = "none";
+        
+                    for (var j = 0; j < precautions.length; j++) {
+                      var precautionItem = document.createElement("span");
+                      precautionItem.textContent = precautions[j];
+                      resultElementPrec.appendChild(precautionItem);
+                      resultElementPrec.appendChild(document.createElement("br"));
+                    }
+        
+                    var resultElementButtonClickListener = function (disease) {
+                      return function () {
+                        redirectToWikipedia(disease);
+                      };
+                    };
+        
+                    resultElementButton.addEventListener(
+                      "click",
+                      resultElementButtonClickListener(disease)
+                    );
+        
+                    resultElement.appendChild(resultElementProbability);
+                    resultElement.appendChild(resultElementButton);
+                    resultElement.appendChild(resultElementProbability1);
+        
+                    // resultElement.appendChild(document.createElement('br'));
+                    precdiv.appendChild(resultElement1);
+                    // precdiv.appendChild(resultElement2);
+                    precdiv.appendChild(resultElementPrec);
+        
+                    resultsElement.appendChild(resultElement);
+                    resultsElement.appendChild(precdiv);
+                    resultsElement.appendChild(nextitem);
+                  }
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error("Error in AJAX request:", status, error);
+                var resultsElement = document.getElementById("results");
+                resultsElement.innerHTML =
+                  "Error occurred while processing the request.";
+              },
+            });
+          } else {
+            alert("select atleast 3 symptoms for better results");
+            document.getElementById("form4Container").display="none";
+            document.getElementById("form3Container").display="none";
+            // showForm(1);
           }
+        } else {
+          alert("select gender");
+          // showForm(0);
+          
         }
-      },
-      error: function (xhr, status, error) {
-        console.error("Error in AJAX request:", status, error);
-        var resultsElement = document.getElementById("results");
-        resultsElement.innerHTML =
-          "Error occurred while processing the request.";
-      },
-    });
-  } else {
-    alert("select atleast 3 symptoms for better results");
-  }
+      } else {
+        alert("please fill the age field");
+        // showForm(0);
+        
+      }
+    } else {
+      alert("please fill the name field");
+      // showForm(0);
+    }
+  
+  
 }
 
 function createPrecautionsToggleHandler(button) {
@@ -470,39 +566,37 @@ function redirectToWikipedia(disease) {
   window.open(url, "_blank");
 }
 
-document.getElementById('loadingOverlay').style.display = 'none';
+document.getElementById("loadingOverlay").style.display = "none";
 
 function onButtonClick(disease, probability) {
   // Show the loading overlay
-  document.getElementById('loadingOverlay').style.display = 'flex';
+  document.getElementById("loadingOverlay").style.display = "flex";
   // Get the disease and probability values from the clicked button
 
   // Make the API call here
   $.ajax({
-    url: '/medic', // Update this URL to match your API route
-    type: 'GET',
-    success: function(response) {
+    url: "/medic", // Update this URL to match your API route
+    type: "GET",
+    success: function (response) {
       // Process the API response
       console.log(disease, probability);
- 
-          // For example, you can call a function to display more details about the disease
-          displaymedic(disease, probability);
-        
-      
+
+      // For example, you can call a function to display more details about the disease
+      displaymedic(disease, probability);
     }.bind(null, disease, probability),
-    error: function(error) {
-      console.log('Error:', error);
+    error: function (error) {
+      console.log("Error:", error);
       // Hide the loading overlay in case of error
-      document.getElementById('loadingOverlay').style.display = 'none';
-    }
+      document.getElementById("loadingOverlay").style.display = "none";
+    },
   });
 }
 
 document.getElementById("medic").addEventListener("click", medic);
 
 function medic() {
-  document.getElementById("medic").style.display = 'none';
-  document.getElementById('loadingOverlay').style.display = 'none';
+  document.getElementById("medic").style.display = "none";
+  document.getElementById("loadingOverlay").style.display = "none";
   document.getElementById("buttonContainer").style.display = "block";
 
   $.ajax({
@@ -513,13 +607,14 @@ function medic() {
       var buttonContainer = document.getElementById("buttonContainer");
       buttonContainer.innerHTML = "get medication for: &nbsp<br><br>";
       // Loop through the 'response' array
+
       for (var i = 0; i < response.length; i++) {
         var disease = response[i].disease;
         var probability = response[i].probability;
         // Create a new button element
         var buttonElement = document.createElement("button");
-        buttonElement.className="dis";
-        buttonElement.style.marginRight = "5px"; 
+        buttonElement.className = "dis";
+        buttonElement.style.marginRight = "5px";
         // buttonElement.classList.add("dis");
 
         // Set the value of the button to the disease name
@@ -528,7 +623,7 @@ function medic() {
 
         // Add an event listener to the button using an IIFE
         (function (d, p) {
-          console.log("mediv funnnc",d,p)
+          console.log("mediv funnnc", d, p);
           buttonElement.addEventListener("click", function () {
             // Handle button click event here
             // For example, you can call a function to display more details about the disease
@@ -539,8 +634,12 @@ function medic() {
         // Append the button to the container
         buttonContainer.appendChild(buttonElement);
       }
+
+
+
       var nextitem1 = document.createElement("span");
-      nextitem1.innerHTML = "_________________________________________________________<br>";
+      nextitem1.innerHTML =
+        "_________________________________________________________<br>";
       buttonContainer.appendChild(nextitem1);
     },
     error: function (error) {
@@ -551,31 +650,34 @@ function medic() {
 
 function displaymedic(disease, probability) {
   document.getElementById("medications-container").style.display = "block";
-  
+
   // Send an AJAX request to the server
   $.ajax({
     url: "/displaymedic",
     type: "POST",
     data: { disease: disease, probability: probability },
     success: function (response) {
-      document.getElementById('loadingOverlay').style.display = 'none';
+      document.getElementById("loadingOverlay").style.display = "none";
       // Check if 'gotohospital' key exists in the response
+
+      // Append the medication element to the medications container
+
       if ("gotohospital" in response) {
         if (response["gotohospital"] == "urgent") {
           $("#medications-container").empty();
           var medicationElement1 = document.createElement("div");
-          medicationElement1.innerHTML = "AGE>>>>>>>......GO TO A DOCTOR -- <b>URGENT !!!!</b>";
+          medicationElement1.innerHTML =
+            "AGE>>>>>>>......GO TO A DOCTOR -- <b>URGENT !!!!</b>";
 
           // Append the medication element to the medications container
           $("#medications-container").append(medicationElement1);
-        } 
-        else {
+        } else {
           // If 'gotohospital' key is present, it means probability is below 50
           console.log(
             "medication will be given to symptoms, not the disease, as probability is less than the threshold"
           );
           $("#medications-container").empty();
-         
+
           // Append the medication element to the medications container
           $("#medications-container").append(medicationElement1);
 
@@ -588,38 +690,44 @@ function displaymedic(disease, probability) {
             $("#medications-container").empty();
 
             var medicationElement1 = document.createElement("div");
-            medicationElement1.innerHTML ="Seek medical attention <b>immediately</b> --- experiencing symptoms for <b>"+duration+"</b> days. <br><br>Use the option to <b>LOCATE NEARBY HOSPITALS</b> for assistance.";
-
+            medicationElement1.innerHTML =
+              "Seek medical attention <b>immediately</b> --- experiencing symptoms for <b>" +
+              duration +
+              "</b> days. <br><br>Use the option to <b>LOCATE NEARBY HOSPITALS</b> for assistance.";
 
             // Append the medication element to the medications container
             $("#medications-container").append(medicationElement1);
-
-
-          } 
-          else {
+          } else {
             console.log("medication for choosen symptoms:");
 
             // Perform any action with the medication response data received from Flask
             console.log(response);
             // Clear previous medications container content
-            var medicationsElement = document.getElementById('medications-container');
-            medicationsElement.innerHTML = 'Medications given to <b>SYMPTOMS</b> <br>(as possibility of having <b>  '+response['disease']+' ('+response['probability']+'%)</b> is less then Threshold)'; // Clear previous content
+            var medicationsElement = document.getElementById(
+              "medications-container"
+            );
+            medicationsElement.innerHTML =
+              "Medications given to <b>SYMPTOMS</b> <br>(as possibility of having <b>  " +
+              response["disease"] +
+              " (" +
+              response["probability"] +
+              "%)</b> is less then Threshold)"; // Clear previous content
 
             // Loop through the medications in the response
-            for (var disease in response.medications) {  
+            for (var disease in response.medications) {
               var medicationList = response.medications[disease];
 
-              var medicationContainer = document.createElement('div');
-              var diseaseElement = document.createElement('h3');
+              var medicationContainer = document.createElement("div");
+              var diseaseElement = document.createElement("h3");
               diseaseElement.textContent = disease;
               medicationContainer.appendChild(diseaseElement);
 
               // Create an unordered list for the medications of the current disease
-              var medicationListElement = document.createElement('ul');
+              var medicationListElement = document.createElement("ul");
 
               // Loop through the medications for the current disease
               for (var i = 0; i < medicationList.length; i++) {
-                var medicationItem = document.createElement('li');
+                var medicationItem = document.createElement("li");
                 medicationItem.textContent = medicationList[i];
                 medicationListElement.appendChild(medicationItem);
               }
@@ -635,31 +743,36 @@ function displaymedic(disease, probability) {
 
         // Perform any action with the medication response data received from Flask
         console.log(response);
-        var dis=response["disease"];
-        var prob=response["probability"];
+        var dis = response["disease"];
+        var prob = response["probability"];
         // Here you can update the web page with the recommended medicines
         // Clear previous medications container content
-     
-        var medicationsElement = document.getElementById('medications-container');
-        medicationsElement.innerHTML = 'Medications for <b>'+response['disease']+'</b> ('+response['probability']+'%) based of patient Details</b> : <br><br>'; 
+
+        var medicationsElement = document.getElementById(
+          "medications-container"
+        );
+        medicationsElement.innerHTML =
+          "Medications for <b>" +
+          response["disease"] +
+          "</b> (" +
+          response["probability"] +
+          "%) based of patient Details</b> : <br><br>";
         // medicationsElement.appendChild(medicationContainer);
 
         // Display medications on the page
-      var medications = response[dis];
-      // const medications = response[response.disease];
-      console.log("medic for prob >50",medications);
+        var medications = response[dis];
+        // const medications = response[response.disease];
+        console.log("medic for prob >50", medications);
 
+        if (medications && Array.isArray(medications)) {
+          medications.forEach(function (medication) {
+            var medicationElement = document.createElement("div");
+            medicationElement.textContent = medication;
+            // medicationsContainer.appendChild(medicationElement);
 
-      if (medications && Array.isArray(medications)) {
-        medications.forEach(function (medication) {
-          var medicationElement = document.createElement("div");
-          medicationElement.textContent = medication;
-          // medicationsContainer.appendChild(medicationElement);
-  
-          medicationsElement.appendChild(medicationElement);
-        });
-      } 
-
+            medicationsElement.appendChild(medicationElement);
+          });
+        }
       }
     },
 
@@ -675,9 +788,6 @@ function stopBlinking() {
   myDiv.classList.remove("blink-animation"); // Remove the animation class
   myDiv.style.cursor = "auto"; // Reset the cursor to default
 }
-
-
-
 
 const roundDiv = document.querySelector(".round-div");
 const rectangleForm = document.querySelector(".rectangle-form");
@@ -698,7 +808,7 @@ const hospitalForm = document.getElementById("locate");
 hospitalForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  document.getElementById('map').style.display="block";
+  document.getElementById("map").style.display = "block";
   var data = {
     locationOption: $("input[name='locationOption']:checked").val(),
     locationInput: $("#locationInput").val(),
@@ -774,9 +884,13 @@ function plotHospitals(hospitalsData) {
         createMarker: function (i, wp, nWps) {
           // Create a custom marker for the waypoints with hospital name as popup
           if (i === 0) {
-            return L.marker(wp.latLng, { icon: customMarkerIcon }).bindPopup("Your Location");
+            return L.marker(wp.latLng, { icon: customMarkerIcon }).bindPopup(
+              "Your Location"
+            );
           } else {
-            return L.marker(wp.latLng, { icon: customMarkerIcon }).bindPopup(hospitalName);
+            return L.marker(wp.latLng, { icon: customMarkerIcon }).bindPopup(
+              hospitalName
+            );
           }
         },
       })
@@ -794,31 +908,27 @@ function plotHospitals(hospitalsData) {
   }
 }
 
-
-
-const floatingInputs = document.querySelectorAll('.floating-input');
-
+const floatingInputs = document.querySelectorAll(".floating-input");
 
 function handleInputFocus(event) {
   const input = event.target;
   const label = input.previousElementSibling;
 
-  label.style.top = '-12px';
-  label.style.left = '10px';
-  label.style.fontSize = '14px';
-  label.style.color = 'rgb(32, 162, 32)';
-
+  label.style.top = "-12px";
+  label.style.left = "10px";
+  label.style.fontSize = "14px";
+  label.style.color = "rgb(32, 162, 32)";
 }
 
 function handleInputBlur(event) {
   const input = event.target;
   const label = input.previousElementSibling;
 
-  if (input.value === '') {
-    label.style.top = '0px';
-    label.style.left = '10px';
-    label.style.fontSize = '14px';
-    label.style.color = '#282727';
+  if (input.value === "") {
+    label.style.top = "0px";
+    label.style.left = "10px";
+    label.style.fontSize = "14px";
+    label.style.color = "#282727";
     // label.style.fontWeight = 'normal';
   }
 }
@@ -826,16 +936,16 @@ function handleInputBlur(event) {
 function handleInputLoad(input) {
   const label = input.previousElementSibling;
 
-  if (input.value !== '') {
-    label.style.top = '-12px';
-    label.style.left = '10px';
-    label.style.fontSize = '14px';
+  if (input.value !== "") {
+    label.style.top = "-12px";
+    label.style.left = "10px";
+    label.style.fontSize = "14px";
     // label.style.fontWeight = 'normal';
   }
 }
 
-floatingInputs.forEach(input => {
-  input.addEventListener('focus', handleInputFocus);
-  input.addEventListener('blur', handleInputBlur);
+floatingInputs.forEach((input) => {
+  input.addEventListener("focus", handleInputFocus);
+  input.addEventListener("blur", handleInputBlur);
   handleInputLoad(input);
 });
