@@ -18,8 +18,8 @@ global response
 global symptoms
 global symsmapping
 
-precaution_df = pd.read_csv('models/disease_precaution.csv')
-hospital_data = pd.read_csv("models/Hospital_Directory.csv")
+precaution_df = pd.read_csv('models\disease_precaution.csv')
+hospital_data = pd.read_csv("models\Hospital_Directory.csv")
 med=pd.read_csv("models/rec-med.csv")
 
 
@@ -89,7 +89,7 @@ def send_data():
     # Retrieve the data from the AJAX request
     global symptoms 
     symptoms = request.get_json()
-    print(symptoms)
+    print("symptoms",symptoms)
 
     symsmapping = create_symptom_mapping(symptoms, all_symptoms)
     
