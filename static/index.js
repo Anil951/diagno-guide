@@ -458,7 +458,8 @@ function sendSymptoms() {
                       resultElementProbability1.innerHTML =
                         "':<span style='color:red;'><b>" +
                         probability +
-                        "%</b> <br><i>as probability is below THRESHOLD--we recommend u to consult Hospital</i> </span> ";
+                        "%</b> <br><i>as probability is below THRESHOLD--we recommend you to consult <b>"+
+                        response[i].doc_type+"</b></i> </span> ";
                     }
         
                     var nextitem = document.createElement("span");
@@ -655,7 +656,7 @@ function displaymedic(disease, probability) {
   $.ajax({
     url: "/displaymedic",
     type: "POST",
-    data: { disease: disease, probability: probability },
+    data: { disease: disease, probability: probability},
     success: function (response) {
       document.getElementById("loadingOverlay").style.display = "none";
       // Check if 'gotohospital' key exists in the response
@@ -693,7 +694,7 @@ function displaymedic(disease, probability) {
             medicationElement1.innerHTML =
               "Seek medical attention <b>immediately</b> --- experiencing symptoms for <b>" +
               duration +
-              "</b> days. <br><br>Use the option to <b>LOCATE NEARBY HOSPITALS</b> for assistance.";
+              "</b> days. <br><br>Use the option to <b>LOCATE NEARBY HOSPITALS</b> for assistance.<br> Consider consulting a <b>"+response["doc_type"]+"</b> for Diagnosis and Clarification.";
 
             // Append the medication element to the medications container
             $("#medications-container").append(medicationElement1);
@@ -711,7 +712,7 @@ function displaymedic(disease, probability) {
               response["disease"] +
               " (" +
               response["probability"] +
-              "%)</b> is less then Threshold)"; // Clear previous content
+              "%)</b> is less then Threshold) <br> Consider consulting a <b>"+response["doc_type"]+"</b> for a more accurate diagnosis and clarification." ; 
 
             // Loop through the medications in the response
             for (var disease in response.medications) {
@@ -756,7 +757,7 @@ function displaymedic(disease, probability) {
           response["disease"] +
           "</b> (" +
           response["probability"] +
-          "%) based of patient Details</b> : <br><br>";
+          "%) based of patient Details</b> : <br> Consider consulting a <b>"+response["doc_type"]+"</b> for a more accurate diagnosis and clarification.<br><br>";
         // medicationsElement.appendChild(medicationContainer);
 
         // Display medications on the page
