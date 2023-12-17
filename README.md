@@ -31,11 +31,12 @@ DiagnoGuide is a comprehensive disease diagnosis and treatment system that harne
 3. Click on "Predict Disease" to receive the predicted disease and personalized medication recommendations.
 4. Use the hospital locator feature to find nearby healthcare facilities.
 
-## Disclaimer
-
-Please note that DiagnoGuide is not a substitute for professional medical advice. It is intended for informational purposes only and should not be considered a medical diagnosis. Always consult a qualified healthcare professional for accurate medical evaluation and treatment.
-
 ## Contributing
 
 We welcome contributions from the community to enhance the system's capabilities and accuracy. Feel free to submit pull requests and report issues on GitHub.
+
+
+> [!NOTE]
+> Please note that DiagnoGuide is not a substitute for professional medical advice. It is intended for informational purposes only and should not be considered a medical diagnosis. Always consult a qualified healthcare professional for accurate medical evaluation and treatment.
+
 
