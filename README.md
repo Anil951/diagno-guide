@@ -35,12 +35,13 @@ DiagnoGuide is a comprehensive disease diagnosis and treatment system that harne
 
 We welcome contributions from the community to enhance the system's capabilities and accuracy. Feel free to submit pull requests and report issues on GitHub.
 
+> [!NOTE]
+> Please note that DiagnoGuide is not a substitute for professional medical advice. It is intended for informational purposes only and should not be considered a medical diagnosis. Always consult a qualified healthcare professional for accurate medical evaluation and treatment.
+
 ## Demo
 <video src='https://github.com/Anil951/diagno-guide/assets/115132631/fe0432b4-d355-4c33-9be0-b4dac71ade26' width=180/>
 
 
-> [!NOTE]
-> Please note that DiagnoGuide is not a substitute for professional medical advice. It is intended for informational purposes only and should not be considered a medical diagnosis. Always consult a qualified healthcare professional for accurate medical evaluation and treatment.
 
 
 
