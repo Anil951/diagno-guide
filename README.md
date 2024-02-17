@@ -36,7 +36,7 @@ DiagnoGuide is a comprehensive disease diagnosis and treatment system that harne
 We welcome contributions from the community to enhance the system's capabilities and accuracy. Feel free to submit pull requests and report issues on GitHub.
 
 ## Demo
-<video src='https://github.com/Anil951/diagno-guide/raw/main/diagnoguide.mp4' width=180/>
+<video src='https://raw.githubusercontent.com/Anil951/diagno-guide/main/diagnoguide.mp4' width=180/>
 
 
 > [!NOTE]
