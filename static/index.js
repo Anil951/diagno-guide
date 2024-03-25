@@ -1,3 +1,4 @@
+
 var buttons = document.getElementsByName("sym");
 for (var i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function () {
