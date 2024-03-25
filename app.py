@@ -22,6 +22,7 @@ global symsmapping
 precaution_df = pd.read_csv('models/disease_precaution.csv')
 hospital_data = pd.read_csv("models/Hospital_Directory.csv")
 med=pd.read_csv("models/rec-med.csv")
+doctype=pd.read_csv("models/Doctor_Versus_Disease.csv",encoding='ISO-8859-1')
 
 
 
