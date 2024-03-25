@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request,jsonify
 import json
 import joblib
@@ -19,8 +18,8 @@ global response
 global symptoms
 global symsmapping
 
-precaution_df = pd.read_csv('models/disease_precaution.csv')
-hospital_data = pd.read_csv("models/Hospital_Directory.csv")
+precaution_df = pd.read_csv('models\disease_precaution.csv')
+hospital_data = pd.read_csv("models\Hospital_Directory.csv")
 med=pd.read_csv("models/rec-med.csv")
 doctype=pd.read_csv("models/Doctor_Versus_Disease.csv",encoding='ISO-8859-1')
 
@@ -91,7 +90,7 @@ def send_data():
     # Retrieve the data from the AJAX request
     global symptoms 
     symptoms = request.get_json()
-    print(symptoms)
+    print("symptoms",symptoms)
 
     symsmapping = create_symptom_mapping(symptoms, all_symptoms)
     
@@ -116,10 +115,15 @@ def send_data():
                     precaution_value = None if isinstance(precaution_value, float) and math.isnan(precaution_value) else precaution_value
                     prec.append(precaution_value)
 
+            result = doctype.loc[doctype['Disease'] == disease, 'Doctor']
+            print("---in send_data()---",result.values[0])
+            doc_type=result.values[0]
+
             disease_details = {
                 'disease': disease,
                 'probability': int(probability * 100),
-                'precautions': prec
+                'precautions': prec,
+                'doc_type':doc_type
             }
             
             response2.append(disease_details)
@@ -249,6 +253,11 @@ def displaymedic():
     alcohol=response['alcohol']
     gender=response['gender']
 
+    
+    result = doctype.loc[doctype['Disease'] == disease, 'Doctor']
+    print(result.values[0])
+    doc_type=result.values[0]
+
     if age > 50:
         response3.update({"gotohospital": "urgent"})
     else:
@@ -265,7 +274,7 @@ def displaymedic():
                 medications1 = get_medication_info([disease])
                 response3.update(medications1)
 
-    response3.update({"disease": disease,"probability":probability})
+    response3.update({"disease": disease,"probability":probability,"doc_type":doc_type})
     print(response3)
     return jsonify(response3)
 
