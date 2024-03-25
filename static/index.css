@@ -1,0 +1,622 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+body{
+  font: .85em verdana;
+  height: 100%;
+  background-color: #eceaea;
+}
+#center {
+  /* Set the desired width and height of your div */
+  width: 700px;
+  height: 400px;
+  /* Optional: Add styles for the centered content */
+  background-color: white;
+  /* border:1px solid black; */
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  -webkit-box-shadow: 1px 6px 34px -3px rgba(0,0,0,0.66);
+-moz-box-shadow: 1px 6px 34px -3px rgba(0,0,0,0.66);
+box-shadow: 1px 6px 34px -3px rgba(0,0,0,0.66);
+
+display: flex;
+  flex-direction: column;
+
+}
+
+
+.upper-section {
+  flex: 1;
+  overflow: auto;
+}
+.upper-section::-webkit-scrollbar {
+  width: 8px; /* width of the scrollbar */
+  
+}
+
+.upper-section::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+  display: none;
+}
+
+.upper-section::-webkit-scrollbar-thumb {
+  background: #3a3a3a; /* color of the scrollbar thumb */
+  border-radius: 10px;
+}
+
+.upper-section::-webkit-scrollbar-thumb:hover {
+  background: #3a3a3a; /* color of the scrollbar thumb on hover */
+}
+
+.lower-section {
+  flex: 0.1;
+  bottom:7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  
+}
+.btn {
+  border:none;
+  background:none;
+  box-shadow:1px 1px 2px rgba(21, 21, 21, 0.1);
+  cursor:pointer;
+  font-size:1rem;
+  font-family: verdana;
+  margin:0 1rem;
+  padding:.25rem 1.5rem;
+  transition:all .25s ease-in-out;
+  border:1px solid black;
+  border-radius: 3px;;
+}
+
+
+
+
+.btn:not(:disabled):hover {
+  background: black;
+  color:white;
+
+  cursor: pointer;
+}
+
+#print{
+  position: absolute;
+  z-index: 10;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+}
+#print:hover{
+  background-color: black;
+  color: white;
+}
+
+
+
+.formContainer {
+    display: none;
+    padding-left:40px;
+    padding-top: 10px;
+  }
+  #form4Container{
+    padding-left:100px;
+  }
+
+  .formContainer.active {
+    display: block;
+  }
+
+  .underline {
+    text-decoration: underline;
+  }
+  .color{
+    color:black;
+  }
+  #heads{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    color:grey;
+    margin-left: 50px;
+  }
+  #form0Container{
+
+    font-size:medium;
+    margin-left: 31px;
+  }
+  #open0{
+    font-size: x-large;
+    margin-bottom: 39px;
+    margin-top: -13px;
+  }
+  #open1{
+    font-family: 'Ubuntu', sans-serif;
+   font-weight: bolder;
+   font-size:medium;
+   margin-top: -13px;
+   margin-bottom: 29px;
+  }
+  #open2{
+    width: 650px;
+    font-family: 'Ubuntu', sans-serif;
+    /* font-weight: bold; */
+    margin-bottom: -5px;
+    margin-left: -13px;
+    margin-top: -3px;
+  }
+  #open2 span{
+    font-size:smaller;
+  }
+  #open3 {
+    position: absolute;
+    right: 58px;
+  }
+
+  #form1Container{
+    margin-left:75px;
+  }
+  #form1Container label{
+    font-family: 'Ubuntu', sans-serif;
+    font-size:medium;
+  }
+
+  /* mullt-select drop down css */
+  .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-select {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  max-width:400px;
+  max-height: 250px;
+  overflow-y: scroll;
+  transform: translate(230px, 33px);
+  position: fixed;
+  outline: 0;
+  border-width: 0px;
+}
+.dropdown-select::-webkit-scrollbar{
+  display:none;
+}
+
+.dropdown-select .selected-item {
+  background-color: #f2f2f2;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-select .selected-item .remove {
+  margin-left: 5px;
+  cursor: pointer;
+}
+#search-input{
+  width:200px;
+  outline: 0;
+  border-width: 0 0 2px;
+  padding:10px;
+  margin-bottom: 15px;
+}
+.dropdown .dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  max-height: 200px;
+  overflow-y: scroll;
+  border: 0px;
+  outline: 0;
+  border-width: 0px;
+}
+
+.dropdown .dropdown-content::-webkit-scrollbar {
+  width: 4px; 
+  display: none;
+}
+
+/* .dropdown .dropdown-content::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  display: none;
+}
+
+.dropdown .dropdown-content::-webkit-scrollbar-thumb {
+  background: #3a3a3a; 
+  border-radius: 10px;
+}
+
+.dropdown .dropdown-content::-webkit-scrollbar-thumb:hover {
+  background: #3a3a3a;
+} */
+
+.dropdown .dropdown-content button {
+  display: block;
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  text-align: left;
+  width:200px;
+  outline: 0;
+  border-width: 0px;
+  padding:10px;
+}
+
+.dropdown .dropdown-content button:hover {
+  background-color: black;
+  color:white;
+
+}
+
+.dropdown .dropdown-content button.selected {
+  background-color: lightgreen;
+  color: black;
+}
+#note{
+  position: absolute;
+  left: 292px;
+  top: 102px;
+  font-size: smaller;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+}
+
+#precdiv{
+  background-color: rgb(231, 231, 231);
+  width: 600px;
+}
+
+#getprec,#medic,.dis,#predict{
+  font-family: 'Ubuntu', sans-serif;
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border: none;
+  /* padding: 0 56px; */
+  height: 20px;
+  /* line-height: 45px; */
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 12px;
+  background: #fff;
+  color: #000000;
+  box-shadow: 0 4px 14px 0 rgb(0 0 0 / 10%);
+  transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+  
+}
+#getprec:hover,#medic:hover,.dis:hover,#predict:hover{
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 6px 20px rgb(93 93 93 / 23%);
+}
+#predict,#medic {
+  /* position: absolute; */
+  height: 23px;
+  width: 76px;
+  /* margin-left: 183px; */
+  /* margin-right: auto; */
+  /* transform: translate(330%, -50%); */
+}
+
+
+
+.round-div {
+  position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #CECECE;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+    /* border: 1px solid black; */
+    box-shadow: 3px 2px 15px #515151, -4px -4px 13px #fff, inset 4px 4px 8px rgba(209, 217, 230, 0.2), inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+    /* border: 1px solid rgba(255, 255, 255, 0.3); */
+    background: #e6e6e6;
+  }
+
+
+.rectangle-form {
+  position: fixed;
+  bottom: 50px;
+  right: 55px;
+  width: 789px;
+  height: 470px;
+  background-color: white;
+  border: 1px solid gray;
+  display: none;
+  border-radius: 0px 40px 0px 40px;
+  transition:all .25s ease-in-out;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.rectangle-form::-webkit-scrollbar {
+  display: none;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+#locate-head{
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bolder;
+  font-size:x-large;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-bottom: 2px solid black;
+  padding-bottom: 10px;
+}
+#live-write{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: 'Ubuntu', sans-serif;
+  font-size:large;
+  gap: 20px;
+}
+#locationInput{
+      
+      font-size: large;
+      margin-top: 20px;
+      background-color: white;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      font-family: 'Ubuntu', sans-serif;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+}
+
+
+
+#locationInput:disabled {
+  background-color: #f0f0f0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+#hos-range{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: 'Ubuntu', sans-serif;
+  font-size:large;
+  gap: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+
+/* Reset the default styles for the input range */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  margin: 10px 0;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Customize the track of the range input */
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  background-color: #252525;
+  border-radius: 5px;
+}
+
+/* Customize the thumb (slider handle) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background-color: #fff;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -3px;
+}
+
+/* Set the value indicator style */
+#hospitalValue {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  color: #000000;
+  margin-top: 5px;
+}
+#locatesubmit{
+
+    font-family: 'Ubuntu', sans-serif;
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    /* padding: 0 56px; */
+    /* line-height: 45px; */
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 15px;
+    background: #fff;
+    color: #000000;
+    box-shadow: 0 4px 14px 0 rgb(0 0 0 / 10%);
+    transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+    height: 23px;
+    width: 76px;
+    border: 1px solid #ccc;
+
+  
+}
+#locatesubmit:hover{
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 6px 20px rgb(93 93 93 / 23%);
+}
+
+#ans{
+  padding:30px;
+}
+#map {
+  
+  height: 424px;
+  width: 689px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+}
+
+.custom-marker-icon {
+  /* Add your custom marker icon styling here */
+  width: 100px;
+  height: 100px;
+  background-color: green;
+  border-radius: 50%;
+}
+
+/* load buffer style */
+#loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  border-radius: 10px;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#txts {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  height: fit-content;
+  margin: 0;
+  gap:10px;
+  /* margin-top: 2px; */
+  font-size: 14px;
+}
+
+.input-container {
+  position: relative;
+  width: 300px;
+  height: fit-content;
+  font-size: 14px;
+}
+
+.input-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.input-container label {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  padding: 3px;
+  pointer-events: none;
+  color: #282727;
+  transition: 0.2s ease all;
+  background-color: #fff;
+  height: fit-content;
+  font-size: 14px;
+  /* color: rgb(32, 162, 32); */
+  font-family: 'Ubuntu', sans-serif;
+
+}
+
+.input-container input[type="text"]:focus + label,
+.input-container input[type="text"]:valid + label {
+  top: -12px;
+  left: 10px;
+  font-size: 14px;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.tooltip {
+  position: absolute;
+  top: calc(100% + -69px);
+  /* left: 5%; */
+  transform: translateX(68%);
+  background-color: #333;
+  color: #fff;
+  padding: 6px;
+  border-radius: 5px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0s 0.3s;
+}
+
+#weight:hover + .tooltip,
+#weight:focus + .tooltip ,
+#height:hover + .tooltip,
+#height:focus + .tooltip {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+
+.gend{
+  color:grey;
+}
+.input-container-radio{
+  height: fit-content;
+}
+.input-container-radio input[type="radio"]{
+  accent-color:rgb(32, 162, 32);
+}
+.input-container-radio input[type="radio"]:checked+ .gend{
+  color:rgb(32, 162, 32); 
+  font-weight: bold;
+
+}
+
+#ht-wt{
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  gap: 30px;
+  height: fit-content;
+}
+
