@@ -414,22 +414,17 @@ def calculate_road_distance(lat1, lon1, lat2, lon2):
 
 from geopy.geocoders import Nominatim
 def getlatlong(location_str):
-    # Create a Nominatim geocoder object
-    geolocator = Nominatim(user_agent="http")
-
-    # Use geocoder to convert location string to latitude and longitude
+    # Create a Nominatim geocoder object with a user-agent
+    geolocator = Nominatim(user_agent="diagnoguide")
     location = geolocator.geocode(location_str)
-
-
     if location is not None:
         latitude = location.latitude
         longitude = location.longitude
-        latitude=float(latitude)
-        longitude=float(longitude)
+        latitude = float(latitude)
+        longitude = float(longitude)
     else:
-        latitude,longitude=None,None
-        
-    return latitude,longitude
+        latitude, longitude = None, None
+    return latitude, longitude
 
 #get users current location
 
