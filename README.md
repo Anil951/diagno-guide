@@ -12,6 +12,8 @@ DiagnoGuide is a comprehensive disease diagnosis and treatment system that harne
 
 3. Hospital Locator: The system offers a hospital locator feature that helps users easily find nearby healthcare facilities on an interactive map, ensuring timely access to medical assistance.
 
+4. Download Prescription: Users can download prescription in 'pdf' format for further corresponding use.
+
 ## Requirements
 
 - Python with Flask framework
@@ -29,7 +31,13 @@ DiagnoGuide is a comprehensive disease diagnosis and treatment system that harne
 1. Provide user details such as age, gender, alcohol consumption, and pregnancy status (if applicable).
 2. Enter the symptoms experienced.
 3. Click on "Predict Disease" to receive the predicted disease and personalized medication recommendations.
-4. Use the hospital locator feature to find nearby healthcare facilities.
+4. Click "Download Prescription" at last to download the generated results.
+5. Use the hospital locator feature to find nearby healthcare facilities.
+
+## Acknowledgements
+
+We would like to extend our gratitude to the [jsPDF project](https://github.com/parallax/jsPDF) for providing the tools to generate and download prescriptions in PDF format. Their work has been invaluable to the functionality of our system.
+
 
 ## Contributing
 
