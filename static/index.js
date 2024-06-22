@@ -1,4 +1,3 @@
-
 var buttons = document.getElementsByName("sym");
 for (var i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function () {
@@ -808,6 +807,7 @@ closeButton.addEventListener("click", () => {
 });
 
 const hospitalForm = document.getElementById("locate");
+let map; // Declare the map variable
 
 hospitalForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -846,8 +846,14 @@ hospitalForm.addEventListener("submit", (event) => {
 
 function plotHospitals(hospitalsData) {
   console.log("in the map plot function");
+
+  // Remove existing map instance if it exists
+  if (map) {
+    map.remove();
+  }
+
   const startPoint = [hospitalsData.latitude, hospitalsData.longitude];
-  const map = L.map("map").setView(startPoint, 13);
+  map = L.map("map").setView(startPoint, 13);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors",
   }).addTo(map);
@@ -911,6 +917,7 @@ function plotHospitals(hospitalsData) {
     });
   }
 }
+
 
 const floatingInputs = document.querySelectorAll(".floating-input");
 
