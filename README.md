@@ -2,7 +2,9 @@
 
 ## Overview
 
-DiagnoGuide is a comprehensive disease diagnosis and treatment system that harnesses the power of Machine Learning algorithms to predict diseases based on user-provided symptoms and personal details. The system offers personalized medication recommendations and assists users in locating nearby healthcare facilities for prompt medical attention. It aims to revolutionize the healthcare industry by providing accurate and timely healthcare solutions to users, empowering them to make informed decisions about their health.
+DiagnoGuide is a comprehensive disease diagnosis and treatment system that harnesses the power of Machine Learning algorithms to predict diseases based on user-provided symptoms and personal details. The system offers personalized medication recommendations and assists users in locating nearby healthcare facilities for prompt medical attention. Additionally, DiagnoGuide allows users to download prescriptions in PDF format, enabling them to easily access and utilize their personalized medication recommendations. DiagnoGuide aims to revolutionize the healthcare industry by providing accurate and timely healthcare solutions to users, empowering them to make informed decisions about their health.
+
+
 
 ## Features
 
